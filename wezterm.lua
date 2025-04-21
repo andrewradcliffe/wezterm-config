@@ -24,6 +24,11 @@ config.keys = {
 		mods = "CTRL|SHIFT",
 		action = wezterm.action.ShowLauncher,
 	},
+	{
+		key = "Backspace",
+		mods = "CTRL",
+		action = wezterm.action.SendString("\x17"),
+	},
 }
 
 -- Launch menu for right-click on tab bar or `Ctrl+Shift+L`
