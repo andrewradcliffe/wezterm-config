@@ -4,17 +4,23 @@ local config = wezterm.config_builder()
 -- Settings
 config.font = wezterm.font("JetBrainsMono NF", { weight = "Bold" })
 config.color_scheme = "Catppuccin Mocha"
-config.default_prog = { "pwsh.exe", "-NoLogo" }
+-- config.window_background_opacity = 0.8
+-- config.win32_system_backdrop = "Disable"
+config.default_prog = { "pwsh.exe" }
+config.default_cwd = os.getenv("USERPROFILE")
 config.window_decorations = "RESIZE"
-config.use_fancy_tab_bar = true
+config.use_fancy_tab_bar = false
+config.tab_bar_at_bottom = true
 config.allow_win32_input_mode = true
-config.hide_tab_bar_if_only_one_tab = true
+config.hide_tab_bar_if_only_one_tab = false
+config.show_new_tab_button_in_tab_bar = false
 config.font_size = 10
 config.enable_scroll_bar = false
+config.tab_max_width = 48
 config.window_padding = {
-	left = 5,
+	left = 0,
 	right = 0,
-	top = 10,
+	top = 5,
 	bottom = 0,
 }
 
@@ -29,6 +35,30 @@ config.keys = {
 		mods = "CTRL",
 		action = wezterm.action.SendString("\x17"),
 	},
+	{
+		key = "w",
+		mods = "ALT",
+		action = wezterm.action.CloseCurrentTab({ confirm = true }),
+	},
+	{
+		key = '"',
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.SplitHorizontal,
+	},
+	{
+		key = "%",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.SplitVertical,
+	},
+	{ key = "1", mods = "CTRL", action = wezterm.action.ActivateTab(0) },
+	{ key = "2", mods = "CTRL", action = wezterm.action.ActivateTab(1) },
+	{ key = "3", mods = "CTRL", action = wezterm.action.ActivateTab(2) },
+	{ key = "4", mods = "CTRL", action = wezterm.action.ActivateTab(3) },
+	{ key = "5", mods = "CTRL", action = wezterm.action.ActivateTab(4) },
+	{ key = "6", mods = "CTRL", action = wezterm.action.ActivateTab(5) },
+	{ key = "7", mods = "CTRL", action = wezterm.action.ActivateTab(6) },
+	{ key = "8", mods = "CTRL", action = wezterm.action.ActivateTab(7) },
+	{ key = "9", mods = "CTRL", action = wezterm.action.ActivateTab(-1) },
 }
 
 -- Launch menu for right-click on tab bar or `Ctrl+Shift+L`
@@ -46,11 +76,5 @@ config.launch_menu = {
 		args = { "wsl.exe", "-d", "Ubuntu" }, -- change name if you use another distro
 	},
 }
-
--- config.window_background_opacity = 1.0
--- config.win32_system_backdrop = "Acrylic"
--- config["colors"] = {
--- 	background = "black",
--- }
 
 return config
