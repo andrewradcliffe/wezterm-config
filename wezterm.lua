@@ -37,7 +37,7 @@ config.tab_max_width = 48
 config.window_padding = {
 	left = 0,
 	right = 0,
-	top = "0.3cell",
+	top = "0.25cell",
 	-- top = 1,
 	bottom = 0,
 }
