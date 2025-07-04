@@ -1,13 +1,30 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
+local mux = wezterm.mux
 
 -- Settings
 config.font = wezterm.font("JetBrainsMono NF", { weight = "Bold" })
 config.color_scheme = "Catppuccin Mocha"
+-- config.color_scheme = "gruvbox_material_dark_hard"
+config.color_schemes = {
+	["gruvbox_material_dark_hard"] = {
+		foreground = "#D4BE98",
+		background = "#000000",
+		cursor_bg = "#D4BE98",
+		cursor_border = "#D4BE98",
+		cursor_fg = "#1D2021",
+		selection_bg = "#D4BE98",
+		selection_fg = "#3C3836",
+
+		ansi = { "#1d2021", "#ea6962", "#a9b665", "#d8a657", "#7daea3", "#d3869b", "#89b482", "#d4be98" },
+		brights = { "#eddeb5", "#ea6962", "#a9b665", "#d8a657", "#7daea3", "#d3869b", "#89b482", "#d4be98" },
+	},
+}
 -- config.window_background_opacity = 0.8
 -- config.win32_system_backdrop = "Disable"
+config.front_end = "OpenGL"
 config.default_prog = { "pwsh.exe" }
-config.default_cwd = os.getenv("USERPROFILE")
+config.default_cwd = "C:/Users/thesa"
 config.window_decorations = "RESIZE"
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
@@ -20,7 +37,8 @@ config.tab_max_width = 48
 config.window_padding = {
 	left = 0,
 	right = 0,
-	top = 5,
+	top = "0.3cell",
+	-- top = 1,
 	bottom = 0,
 }
 
@@ -49,6 +67,36 @@ config.keys = {
 		key = "%",
 		mods = "CTRL|SHIFT",
 		action = wezterm.action.SplitVertical,
+	},
+	{
+		key = "+",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.AdjustPaneSize({ "Up", 5 }),
+	},
+	{
+		key = "-",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.AdjustPaneSize({ "Down", 5 }),
+	},
+	{
+		key = "h",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.ActivatePaneDirection("Left"),
+	},
+	{
+		key = "j",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.ActivatePaneDirection("Down"),
+	},
+	{
+		key = "k",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.ActivatePaneDirection("Up"),
+	},
+	{
+		key = "l",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.ActivatePaneDirection("Right"),
 	},
 	{ key = "1", mods = "CTRL", action = wezterm.action.ActivateTab(0) },
 	{ key = "2", mods = "CTRL", action = wezterm.action.ActivateTab(1) },
