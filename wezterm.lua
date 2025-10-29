@@ -5,6 +5,8 @@ local act = wezterm.action
 
 -- Settings
 config.font = wezterm.font("JetBrainsMono NF", { weight = "Bold" })
+config.font_size = 11
+
 config.color_scheme = "Catppuccin Mocha"
 -- config.color_scheme = "gruvbox_material_dark_hard"
 config.color_schemes = {
@@ -35,7 +37,6 @@ config.tab_bar_at_bottom = true
 config.allow_win32_input_mode = true
 config.hide_tab_bar_if_only_one_tab = false
 config.show_new_tab_button_in_tab_bar = false
-config.font_size = 10
 config.enable_scroll_bar = false
 config.tab_max_width = 48
 config.window_padding = {
@@ -45,6 +46,9 @@ config.window_padding = {
     -- top = 1,
     bottom = 0,
 }
+config.underline_position = -3
+
+config.warn_about_missing_glyphs = false
 
 config.keys = {
     {
@@ -105,47 +109,47 @@ config.keys = {
     {
         key = "1",
         mods = "CTRL",
-        action = act.ActivateTab(0)
+        action = act.ActivateTab(0),
     },
     {
         key = "2",
         mods = "CTRL",
-        action = act.ActivateTab(1)
+        action = act.ActivateTab(1),
     },
     {
         key = "3",
         mods = "CTRL",
-        action = act.ActivateTab(2)
+        action = act.ActivateTab(2),
     },
     {
         key = "4",
         mods = "CTRL",
-        action = act.ActivateTab(3)
+        action = act.ActivateTab(3),
     },
     {
         key = "5",
         mods = "CTRL",
-        action = act.ActivateTab(4)
+        action = act.ActivateTab(4),
     },
     {
         key = "6",
         mods = "CTRL",
-        action = act.ActivateTab(5)
+        action = act.ActivateTab(5),
     },
     {
         key = "7",
         mods = "CTRL",
-        action = act.ActivateTab(6)
+        action = act.ActivateTab(6),
     },
     {
         key = "8",
         mods = "CTRL",
-        action = act.ActivateTab(7)
+        action = act.ActivateTab(7),
     },
     {
         key = "9",
         mods = "CTRL",
-        action = act.ActivateTab(-1)
+        action = act.ActivateTab(-1),
     },
     -- {
     --     key = "d",
@@ -174,5 +178,20 @@ config.launch_menu = {
         args = { "wsl.exe", "-d", "Ubuntu" }, -- change name if you use another distro
     },
 }
+
+wezterm.on("user-var-changed", function(window, pane, name, value)
+    local overrides = window:get_config_overrides() or {}
+    if name == "ZEN_MODE" then
+        if value == "on" then
+            window:perform_action(wezterm.action.IncreaseFontSize, pane)
+            overrides.enable_tab_bar = false
+        end
+        if value == "off" then
+            window:perform_action(wezterm.action.ResetFontSize, pane)
+            overrides.enable_tab_bar = true
+        end
+    end
+    window:set_config_overrides(overrides)
+end)
 
 return config
