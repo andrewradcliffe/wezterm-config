@@ -5,22 +5,47 @@ local act = wezterm.action
 
 -- Settings
 config.font = wezterm.font("JetBrainsMono NF", { weight = "Bold" })
-config.font_size = 11
+config.font_size = 11.0
 
-config.color_scheme = "Catppuccin Mocha"
--- config.color_scheme = "gruvbox_material_dark_hard"
+-- config.color_scheme = "Catppuccin Mocha"
+config.color_scheme = "Kanagawa Dragon (Gogh)"
+-- config.color_scheme = "Kanagawa Dragon (Custom)"
+
 config.color_schemes = {
-    ["gruvbox_material_dark_hard"] = {
-        foreground = "#D4BE98",
-        background = "#000000",
-        cursor_bg = "#D4BE98",
-        cursor_border = "#D4BE98",
-        cursor_fg = "#1D2021",
-        selection_bg = "#D4BE98",
-        selection_fg = "#3C3836",
+    ["Kanagawa Dragon (Custom)"] = {
+        foreground = "#c5c9c5",
+        background = "#181616",
 
-        ansi = { "#1d2021", "#ea6962", "#a9b665", "#d8a657", "#7daea3", "#d3869b", "#89b482", "#d4be98" },
-        brights = { "#eddeb5", "#ea6962", "#a9b665", "#d8a657", "#7daea3", "#d3869b", "#89b482", "#d4be98" },
+        cursor_bg = "#C8C093",
+        cursor_fg = "#C8C093",
+        cursor_border = "#C8C093",
+
+        selection_fg = "#C8C093",
+        selection_bg = "#2D4F67",
+
+        scrollbar_thumb = "#16161D",
+        split = "#16161D",
+
+        ansi = {
+            "#0D0C0C",
+            "#C4746E",
+            "#8A9A7B",
+            "#C4B28A",
+            "#8BA4B0",
+            "#A292A3",
+            "#8EA4A2",
+            "#C8C093",
+        },
+        brights = {
+            "#A6A69C",
+            "#E46876",
+            "#87A987",
+            "#E6C384",
+            "#7FB4CA",
+            "#938AA9",
+            "#7AA89F",
+            "#C5C9C5",
+        },
     },
 }
 
@@ -47,6 +72,7 @@ config.window_padding = {
     bottom = 0,
 }
 config.underline_position = -3
+-- config.force_reverse_video_cursor = true
 
 config.warn_about_missing_glyphs = false
 
